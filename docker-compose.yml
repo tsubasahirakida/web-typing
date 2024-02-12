@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 services:
   db:
@@ -36,7 +36,7 @@ services:
       - ./front:/usr/src/app
     command: sh -c 'npm install && npm start'
     ports:
-      - "8000:3000"
+      - "8000:8000"
 volumes:
   mysql-db:
     driver: local
