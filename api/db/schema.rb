@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2024_02_12_135245) do
 
-  create_table "create_web_quizzes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "web_quizzes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "title"
     t.text "description_ja"
     t.text "typing_content"
