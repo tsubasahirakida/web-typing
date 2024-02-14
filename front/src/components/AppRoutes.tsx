@@ -1,8 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
 import TopPage from '../pages/TopPage';
-import { GemePage } from '../pages/GemePage';
+import { GamePage } from '../pages/GamePage';
 
 export const router = createBrowserRouter([
   { path: '/', element: <TopPage /> },
-  { path: '/top', element: <GemePage /> },
+  { path: '/top', element: <GamePage /> },
 ]);
