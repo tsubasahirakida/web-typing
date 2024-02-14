@@ -2,9 +2,11 @@ import React, { useState, useEffect, FC } from 'react';
 import baseBackground from '../img/pop.png';
 import background from '../img/window.png';
 import { Link } from 'react-router-dom';
+import axios from 'axios'; // axiosをインポート
 
 export const GamePage: FC = () => {
   const [countdown, setCountdown] = useState<number | null>(null);
+  const [quiz, setQuiz] = useState<any>(null); // クイズデータを格納するための状態
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -28,6 +30,16 @@ export const GamePage: FC = () => {
       // 1秒ごとにカウントダウン
       const timerId = setTimeout(() => setCountdown(countdown - 1), 1000);
       return () => clearTimeout(timerId);
+    } else if (countdown === 0) {
+      // カウントダウンが0になったらクイズを取得
+      console.log(`${process.env.REACT_APP_API_BASE_URL}`);
+      axios
+        .get(`${process.env.REACT_APP_API_BASE_URL}/web_quizzes`)
+        .then((response) => {
+          setQuiz(response.data[0]); // 1問目のクイズをセット
+          setCountdown(null); // カウントダウンをリセット
+        })
+        .catch((error) => console.error('Error:', error));
     }
   }, [countdown]);
 
@@ -58,6 +70,13 @@ export const GamePage: FC = () => {
                 <p className="text text-black text-xl font-medium my-4 text-center whitespace-pre-wrap">
                   Press Space to start the countdown.
                 </p>
+              )}
+              {quiz && (
+                <div>
+                  <h2>{quiz.title}</h2>
+                  <p>{quiz.description_ja}</p>
+                  <p>{quiz.typing_content}</p>
+                </div>
               )}
             </div>
           </div>
